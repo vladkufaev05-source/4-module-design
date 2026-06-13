@@ -2,3 +2,8 @@
     font-family: "VLASHU";
     src: url(../fonts/VLASHU.TTF) format("truetype");
 }
+
+@font-face {
+    font-family: "KyivTypeTitling";
+    src: url(../fonts/KyivTypeTitling-VarGX.ttf) format("truetype");
+}
