@@ -274,3 +274,106 @@ html, body {
 .btn-error:hover {
     transform: translateY(-2px);
 }
+
+
+
+/* registration */
+
+.registration-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 100px 5vw 50px;
+    background-color: #253254;
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    width: 100%;
+    max-width: 600px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8vw;
+}
+
+.form-label {
+    font-size: 1.8vw;
+    color: var(--text-white);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.5vw;
+    padding: 1.2vw 1.5vw;
+    border: 2px solid var(--text-light);
+    background: transparent;
+}
+
+.input-icon {
+    width: 2vw;
+    height: 2vw;
+    flex-shrink: 0;
+}
+
+.form-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-white);
+    font-size: 1.4vw;
+}
+
+.form-input::placeholder {
+    color: var(--text-light);
+    opacity: 0.5;
+}
+
+.btn-register {
+    background-color: var(--text-light);
+    color: var(--text-dark);
+    padding: 1.5vw 3vw;
+    font-size: 2vw;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-top: 1.5vw;
+    align-self: center;
+    width: 70%;
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+}
+
+.form-footer {
+    text-align: center;
+    font-size: 1.5vw;
+    color: var(--text-light);
+    margin-top: 1vw;
+}
+
+.link-login {
+    color: #9B96EB;
+    text-decoration: none !important;
+}
+
+.link-login:hover {
+    opacity: 0.7;
+    text-decoration: none;
+    
+}
+
+a {
+    text-decoration: none;
+}
