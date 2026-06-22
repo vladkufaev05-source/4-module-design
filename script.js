@@ -11,25 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         arrow.addEventListener('click', () => {
             currentIndex++;
-
-            if (currentIndex > maxIndex) {
-                currentIndex = 0;
-            }
+            if (currentIndex > maxIndex) currentIndex = 0;
 
             const card = track.children[0];
             const cardWidth = card.offsetWidth;
             const gap = parseFloat(getComputedStyle(track).gap) || 32;
-            const offset = currentIndex * (cardWidth + gap);
-
-            track.style.transform = `translateX(-${offset}px)`;
+            track.style.transform = `translateX(-${currentIndex * (cardWidth + gap)}px)`;
         });
 
         window.addEventListener('resize', () => {
             const card = track.children[0];
             const cardWidth = card.offsetWidth;
             const gap = parseFloat(getComputedStyle(track).gap) || 32;
-            const offset = currentIndex * (cardWidth + gap);
-            track.style.transform = `translateX(-${offset}px)`;
+            track.style.transform = `translateX(-${currentIndex * (cardWidth + gap)}px)`;
         });
     }
 
@@ -41,54 +35,34 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalImage = modal.querySelector('.modal-image');
         const petCards = document.querySelectorAll('.pet-card');
 
-        const modalPetImage = document.getElementById('modalPetImage');
-        const modalPetName = document.getElementById('modalPetName');
-        const modalPetAge = document.getElementById('modalPetAge');
-        const modalPetGender = document.getElementById('modalPetGender');
-        const modalPetBirth = document.getElementById('modalPetBirth');
-        const modalPetWeight = document.getElementById('modalPetWeight');
-        const modalPetCharacter = document.getElementById('modalPetCharacter');
-        const modalPetFeatures = document.getElementById('modalPetFeatures');
+        const fields = {
+            modalPetImage: 'image',
+            modalPetName: 'name',
+            modalPetAge: 'age',
+            modalPetGender: 'gender',
+            modalPetBirth: 'birth',
+            modalPetWeight: 'weight',
+            modalPetCharacter: 'character',
+            modalPetFeatures: 'features'
+        };
 
         petCards.forEach(card => {
             card.addEventListener('click', () => {
-                modalPetImage.src = card.dataset.image || card.src;
-                modalPetName.textContent = card.dataset.name || '';
-                modalPetAge.textContent = card.dataset.age || '';
-                modalPetGender.textContent = card.dataset.gender || '';
-                modalPetBirth.textContent = card.dataset.birth || '';
-                modalPetWeight.textContent = card.dataset.weight || '';
-                modalPetCharacter.textContent = card.dataset.character || '';
-                modalPetFeatures.textContent = card.dataset.features || '';
+                Object.entries(fields).forEach(([id, key]) => {
+                    const el = document.getElementById(id);
+                    if (el) el[key === 'image' ? 'src' : 'textContent'] = card.dataset[key] || (key === 'image' ? card.src : '');
+                });
 
-                if (card.dataset.bgColor) {
-                    modalContent.style.backgroundColor = card.dataset.bgColor;
-                }
-                if (card.dataset.imageBgColor) {
-                    modalImage.style.backgroundColor = card.dataset.imageBgColor;
-                }
+                if (card.dataset.bgColor) modalContent.style.backgroundColor = card.dataset.bgColor;
+                if (card.dataset.imageBgColor) modalImage.style.backgroundColor = card.dataset.imageBgColor;
 
                 modal.classList.add('active');
             });
         });
 
-        if (modalClose) {
-            modalClose.addEventListener('click', () => {
-                modal.classList.remove('active');
-            });
-        }
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-            }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                modal.classList.remove('active');
-            }
-        });
+        modalClose?.addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) modal.classList.remove('active'); });
     }
 
     const reviewInput = document.getElementById('reviewInput');
@@ -96,70 +70,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (reviewInput && reviewBtn) {
         reviewBtn.addEventListener('click', () => {
-            if (reviewInput.value.trim() !== '') {
+            if (reviewInput.value.trim()) {
                 reviewInput.value = '';
                 alert('Отзыв отправлен!');
             }
         });
     }
 
-    const missionModal = document.getElementById('missionModal');
-    const openMissionBtn = document.getElementById('openMissionBtn');
-    const missionModalClose = document.getElementById('missionModalClose');
+    ['mission', 'methodology'].forEach(name => {
+        const modal = document.getElementById(`${name}Modal`);
+        const openBtn = document.getElementById(`open${name.charAt(0).toUpperCase() + name.slice(1)}Btn`);
+        const closeBtn = document.getElementById(`${name}ModalClose`);
 
-    if (openMissionBtn && missionModal) {
-        openMissionBtn.addEventListener('click', () => {
-            missionModal.classList.add('active');
-        });
-    }
-
-    if (missionModalClose && missionModal) {
-        missionModalClose.addEventListener('click', () => {
-            missionModal.classList.remove('active');
-        });
-    }
-
-    if (missionModal) {
-        missionModal.addEventListener('click', (e) => {
-            if (e.target === missionModal) {
-                missionModal.classList.remove('active');
-            }
-        });
-    }
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && missionModal && missionModal.classList.contains('active')) {
-            missionModal.classList.remove('active');
+        if (modal) {
+            openBtn?.addEventListener('click', () => modal.classList.add('active'));
+            closeBtn?.addEventListener('click', () => modal.classList.remove('active'));
+            modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) modal.classList.remove('active'); });
         }
     });
 
-    const methodologyModal = document.getElementById('methodologyModal');
-    const openMethodologyBtn = document.getElementById('openMethodologyBtn');
-    const methodologyModalClose = document.getElementById('methodologyModalClose');
+    const researchTrack = document.getElementById('researchTrack');
+    const arrowLeft = document.querySelector('.research-arrow-left');
+    const arrowRight = document.querySelector('.research-arrow-right');
 
-    if (openMethodologyBtn && methodologyModal) {
-        openMethodologyBtn.addEventListener('click', () => {
-            methodologyModal.classList.add('active');
+    if (researchTrack && arrowLeft && arrowRight) {
+        const totalSpreads = researchTrack.children.length;
+        let currentIndex = 0;
+
+        function updateResearchCarousel() {
+            const card = researchTrack.children[0];
+            const cardWidth = card.offsetWidth;
+            const gap = parseFloat(getComputedStyle(researchTrack).gap) || 48;
+            researchTrack.style.transform = `translateX(-${currentIndex * (cardWidth + gap)}px)`;
+        }
+
+        arrowRight.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSpreads;
+            updateResearchCarousel();
         });
+
+        arrowLeft.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSpreads) % totalSpreads;
+            updateResearchCarousel();
+        });
+
+        window.addEventListener('resize', updateResearchCarousel);
     }
 
-    if (methodologyModalClose && methodologyModal) {
-        methodologyModalClose.addEventListener('click', () => {
-            methodologyModal.classList.remove('active');
-        });
-    }
+    const registerBtn = document.getElementById('registerBtn');
+    const inputName = document.getElementById('inputName');
+    const inputEmail = document.getElementById('inputEmail');
+    const inputPassword = document.getElementById('inputPassword');
 
-    if (methodologyModal) {
-        methodologyModal.addEventListener('click', (e) => {
-            if (e.target === methodologyModal) {
-                methodologyModal.classList.remove('active');
+    if (registerBtn && inputName && inputEmail && inputPassword) {
+        registerBtn.addEventListener('click', () => {
+            if (inputName.value.trim() && inputEmail.value.trim() && inputPassword.value.trim()) {
+                window.location.href = 'error.html';
+            } else {
+                alert('Пожалуйста, заполните все поля!');
             }
         });
     }
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && methodologyModal && methodologyModal.classList.contains('active')) {
-            methodologyModal.classList.remove('active');
-        }
-    });
 });

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный Кабинет - Virtual Beasts</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="icon" href="assets/icon.svg">
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo-link">
+            <img src="assets/logo.svg" alt="" class="logo">
+        </a>
+        <nav class="nav">
+            <a href="about.html" class="nav-link">о нас</a>
+            <a href="research.html" class="nav-link">исследования</a>
+            <a href="events.html" class="nav-link">события</a>
+            <a href="pets.html" class="nav-link">наши питомцы</a>
+            <a href="registration.html" class="nav-link">личный кабинет</a>
+        </nav>
+        <button class="burger" aria-label="menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <section class="registration-screen">
+    <div class="registration-form">
+        <div class="form-group">
+            <label class="form-label">ИМЯ</label>
+            <div class="input-wrapper">
+                <img src="assets/human.svg" alt="" class="input-icon">
+                <input type="text" class="form-input" id="inputName" placeholder="Введите ваше имя">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">ПОЧТА</label>
+            <div class="input-wrapper">
+                <img src="assets/words.svg" alt="" class="input-icon">
+                <input type="email" class="form-input" id="inputEmail" placeholder="example@mail.ru">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">ПАРОЛЬ</label>
+            <div class="input-wrapper">
+                <img src="assets/lock.svg" alt="" class="input-icon">
+                <input type="password" class="form-input" id="inputPassword" placeholder="Введите пароль">
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-register" id="registerBtn">Войти</button>
+
+    </div>
+    </section>
+
+    <footer class="footer">
+    <div class="footer-column footer-left">
+        <div class="footer-social">
+            <h3 class="footer-title">Соцсети</h3>
+            <div class="social-icons">
+                <a href="error.html" class="social-link">
+                    <img src="./assets/vk-logo.svg" alt="VK" class="social-icon">
+                </a>
+                <a href="error.html" class="social-link">
+                    <img src="./assets/tt-logo.svg" alt="TikTok" class="social-icon">
+                </a>
+                <a href="error.html" class="social-link">
+                    <img src="./assets/pint-logo.svg" alt="Pinterest" class="social-icon">
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer-contacts">
+            <h3 class="footer-title">Контакты</h3>
+            <p class="contact-text">г. Москва<br>Покровский бульвар д.11<br>Высшая Школа Экономики</p>
+        </div>
+    </div>
+
+    <div class="footer-column footer-center">
+        <div class="review-form">
+            <input type="text" class="review-input" id="reviewInput" placeholder="Оставьте отзыв...">
+            <button class="review-btn" id="reviewBtn" aria-label="Отправить отзыв">
+                <img src="./assets/paw-footer.svg" alt="" class="paw-icon">
+            </button>
+        </div>
+        
+        <div class="footer-school">
+            <h2 class="school-name">HSE ART AND<br>DESIGN SCHOOL</h2>
+        </div>
+    </div>
+
+    <div class="footer-column footer-right">
+        <a href="error.html" class="footer-link">
+            ЗАПИСАТЬСЯ<br>К ВЕТВРАЧУ
+            <img src="./assets/arrow-footer.svg" alt="" class="footer-arrow">
+        </a>
+        <div class="footer-divider"></div>
+        
+        <a href="pets.html" class="footer-link">
+            ВЗЯТЬ ПИТОМЦА
+            <img src="./assets/arrow-footer.svg" alt="" class="footer-arrow">
+        </a>
+        <div class="footer-divider"></div>
+        
+        <div class="footer-info">
+            <p class="footer-email">vakufaev@edu.hse.ru</p>
+            <p class="footer-phone">+7 (925) 761-04-50</p>
+            <p class="footer-copyright">Virtual Beasts 2026</p>
+        </div>
+    </div>
+    </footer>
+    
+
+
+    <script src="script.js"></script>
+</body>
+</html>
